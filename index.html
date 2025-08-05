@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+  /* Reset & basics */
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  body {
+    background: #0f2027;  /* dark blue background */
+    background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+    color: #fff;
+    line-height: 1.6;
+  }
+  a {
+    color: #00d8ff;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+  section {
+    padding: 80px 15px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  h1, h2, h3 {
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Navbar */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(15, 32, 39, 0.9);
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    z-index: 1000;
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+  }
+  nav li {
+    margin: 0 20px;
+  }
+  nav a {
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+  }
+  nav a:hover, nav a.active {
+    color: #00d8ff;
+  }
+
+  /* Hero */
+  #hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+  #hero h1 {
+    font-size: 4rem;
+    animation: fadeInDown 1s ease forwards;
+  }
+  #hero p {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #00d8ff;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 0.7s;
+  }
+  #hero button {
+    margin-top: 40px;
+    background: #00d8ff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    animation: fadeInUp 1s ease forwards;
+    animation-delay: 1.2s;
+  }
+  #hero button:hover {
+    background: #008fb3;
+  }
+
+  /* Animations */
+  @keyframes fadeInDown {
+    0% {opacity: 0; transform: translateY(-30px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+  @keyframes fadeInUp {
+    0% {opacity: 0; transform: translateY(30px);}
+    100% {opacity: 1; transform: translateY(0);}
+  }
+
+  /* About */
+  #about {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  #about img {
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px #00d8ffaa;
+    transition: transform 0.3s ease;
+  }
+  #about img:hover {
+    transform: scale(1.05);
+  }
+  #about .about-text {
+    flex: 1;
+    font-size: 1.1rem;
+    color: #cfd8dc;
+  }
+
+  /* Skills */
+  #skills .skill {
+    margin-bottom: 20px;
+  }
+  #skills .skill-name {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  #skills .skill-bar {
+    background: #203a43;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+  #skills .skill-bar div {
+    height: 18px;
+    background: #00d8ff;
+    width: 0;
+    border-radius: 30px;
+    transition: width 1.5s ease;
+  }
+
+  /* Projects */
+  #projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 30px;
+  }
+  .project-card {
+    background: #142f44;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px #00d8ff44;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px #00d8ffaa;
+  }
+  .project-card img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 15px;
+  }
+  .project-card h3 {
+    margin-bottom: 10px;
+  }
+  .project-card p {
+    color: #cfd8dc;
+  }
+  .project-links {
+    margin-top: 15px;
+  }
+  .project-links a {
+    margin-right: 15px;
+    font-weight: 600;
+    color: #00d8ff;
+  }
+  .project-links a:hover {
+    color: #008fb3;
+  }
+
+  /* Contact */
+  #contact form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  #contact label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  #contact input, #contact textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1rem;
+  }
+  #contact textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  #contact button {
+    background: #00d8ff;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  #contact button:hover {
+    background: #008fb3;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 25px 15px;
+    background: #142f44;
+    margin-top: 60px;
+    color: #90caf9;
+  }
+
+  /* Responsive */
+  @media(max-width: 768px) {
+    #about {
+      flex-direction: column;
+      text-align: center;
+    }
+    #about img {
+      margin-bottom: 20px;
+      width: 250px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <h1>Hello, I'm <span style="color:#00d8ff;">Your Name</span></h1>
+  <p>I'm a Frontend Developer | Designer | Problem Solver</p>
+  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get In Touch</button>
+</section>
+
+<section id="about">
+  <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=300&q=80" alt="Profile Photo" />
+  <div class="about-text">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate developer with a knack for creating beautiful, responsive, and performant web applications.
+      With a strong foundation in HTML, CSS, and JavaScript, I specialize in turning ideas into reality through clean code and thoughtful design.
+      I love to learn and continuously improve my skills by working on exciting projects.
+    </p>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skill">
+    <div class="skill-name">HTML & CSS</div>
+    <div class="skill-bar"><div style="width: 90%;"></div></div>
+  </div>
+  <div class="skill">
+    <div class="skill-name">JavaScript</div>
+    <div class="skill-bar"><div style="width: 85%;"></div></div>
+  </div>
+  <div class="skill">
+    <div class="skill-name">React</div>
+    <div class="skill-bar"><div style="width: 75%;"></div></div>
+  </div>
+  <div class="skill">
+    <div class="skill-name">Node.js</div>
+    <div class="skill-bar"><div style="width: 70%;"></div></div>
+  </div>
+  <div class="skill">
+    <div class="skill-name">UI/UX Design</div>
+    <div class="skill-bar"><div style="width: 65%;"></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+  
+  <div class="project-card">
+    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80" alt="Project 1" />
+    <h3>Project One</h3>
+    <p>A responsive e-commerce website built with React and styled-components.</p>
+    <div class="project-links">
+      <a href="#" target="_blank">Live Demo</a>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=400&q=80" alt="Project 2" />
+    <h3>Project Two</h3>
+    <p>A task management app using React, Redux, and Firebase authentication.</p>
+    <div class="project-links">
+      <a href="#" target="_blank">Live Demo</a>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Project 3" />
+    <h3>Project Three</h3>
+    <p>Portfolio website with smooth scrolling, animations, and dark mode support.</p>
+    <div class="project-links">
+      <a href="#" target="_blank">Live Demo</a>
+      <a href="#" target="_blank">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <form onsubmit="event.preventDefault(); alert('Message sent!')">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required placeholder="Your name" />
+    
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required placeholder="Your email" />
+    
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required placeholder="Your message"></textarea>
+    
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Your Name | Designed with ❤️
+</footer>
+
+<script>
+  // Smooth scrolling for nav links
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+      const target = document.querySelector(link.getAttribute('href'));
+      target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Animate skill bars on scroll
+  function animateSkills() {
+    const skills = document.querySelectorAll('#skills .skill-bar div');
+    const triggerPoint = window.innerHeight * 0.9;
+    skills.forEach(skill => {
+      const skillTop = skill.getBoundingClientRect().top;
+      if(skillTop < triggerPoint) {
+        skill.style.width = skill.style.width; // width is set inline already
+      } else {
+        skill.style.width = '0';
+      }
+    });
+  }
+  window.addEventListener('scroll', animateSkills);
+  window.addEventListener('load', animateSkills);
+</script>
+
+</body>
+</html>
